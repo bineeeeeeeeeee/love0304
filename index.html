@@ -1,27 +1,112 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>LOVE0304</title>
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+    body, html {
       margin: 0;
-      font-family: 'Noto Serif KR', serif;
-      background: #fff0f5;
-      color: #333;
+      padding: 0;
+      height: 100%;
+      font-family: 'Nanum Myeongjo', serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #f9e6e8;
+      scroll-behavior: smooth;
+      position: relative;
+    }
+    /* 반투명 어두운 오버레이 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(30, 0, 20, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 192, 203, 0.85);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #f9e6e8;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav a:hover, nav a:focus {
+      border-bottom: 2px solid #ffc0cb;
+    }
+
+    main {
+      padding-top: 60px;
+      max-width: 800px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+    }
+
+    section {
+      padding: 3rem 1rem;
+      border-bottom: 1px solid #ffc0cb;
+      min-height: 80vh;
+      background: rgba(50, 0, 30, 0.4);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+    }
+    section h2 {
+      color: #ffc0cb;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 1px 1px 4px #330014;
+    }
+
+    /* 로그인 화면 */
+    .container {
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      transition: background 1s;
+      flex-direction: column;
+      background: rgba(30, 0, 20, 0.8);
+      color: #f9e6e8;
     }
-    .container, .content {
-      text-align: center;
-    }
-    .hidden { display: none; }
     input {
       padding: 10px;
       font-size: 1em;
+      border: 1px solid #ffc0cb;
+      border-radius: 5px;
+      width: 220px;
+      margin-bottom: 1rem;
+      background: transparent;
+      color: #f9e6e8;
+    }
+    input::placeholder {
+      color: #f9c1c8;
     }
     button {
       padding: 10px 20px;
@@ -29,23 +114,48 @@
       background-color: #ffc0cb;
       border: none;
       cursor: pointer;
-    }
-    .content h1 {
-      font-size: 2.5em;
+      border-radius: 5px;
+      font-weight: 600;
       color: #8b0000;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ffb6c1;
     }
   </style>
 </head>
 <body>
   <div class="container" id="login">
     <h2>비밀번호를 입력하세요</h2>
-    <input type="password" id="password" placeholder="비밀번호">
+    <input type="password" id="password" placeholder="비밀번호" />
     <button onclick="checkPassword()">입장</button>
   </div>
 
-  <div class="content hidden" id="mainContent">
-    <h1>LOVE0304에 오신 걸 환영합니다</h1>
-    <p>이곳은 우리만의 비밀 공간입니다 💖</p>
+  <div id="mainContent" style="display:none;">
+    <header>
+      <nav>
+        <a href="#diary">Diary</a>
+        <a href="#photo">Photo</a>
+        <a href="#message">Message</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="diary">
+        <h2>Diary</h2>
+        <p>오늘의 기록을 여기에 적어보세요.</p>
+      </section>
+
+      <section id="photo">
+        <h2>Photo</h2>
+        <p>사진을 올리고 감상할 수 있는 공간입니다.</p>
+      </section>
+
+      <section id="message">
+        <h2>Message</h2>
+        <p>당신에게 전하고 싶은 메시지를 남겨보세요.</p>
+      </section>
+    </main>
   </div>
 
   <script>
@@ -53,8 +163,8 @@
       const pw = document.getElementById("password").value;
       if (pw === "0304") {
         document.getElementById("login").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-        document.body.style.background = "#ffe4e1";
+        document.getElementById("mainContent").style.display = "block";
+        // 배경 변경하지 않고 이미지 유지
       } else {
         alert("비밀번호가 틀렸습니다.");
       }
