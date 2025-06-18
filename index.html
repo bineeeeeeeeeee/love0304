@@ -100,9 +100,8 @@
       box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
     }
     #mainSection img {
-      max-width: 100%;
-      max-height: 400px;
-      border-radius: 15px;
+      max-width: 150px;
+      border-radius: 50%;
       box-shadow: 0 4px 15px rgba(255, 182, 193, 0.7);
     }
     #mainSection p {
@@ -133,9 +132,6 @@
       background: transparent;
       color: #f9e6e8;
     }
-    input::placeholder {
-      color: #f9c1c8;
-    }
     button {
       padding: 10px 20px;
       font-size: 1em;
@@ -158,6 +154,14 @@
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
       display: none;
+      margin-top: 20px;
+    }
+
+    #unmuteButton {
+      display: none;
+      margin: 1rem auto;
+      background-color: #fce4ec;
+      color: #880e4f;
     }
   </style>
 </head>
@@ -181,7 +185,7 @@
     <main>
       <section id="mainSection">
         <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
-        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Romantic Image" />
+        <img src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/500931322_18140446648398181_954485054812735421_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=scontent-ssn1-1.cdninstagram.com&_nc_cat=101&_nc_oc=Q6cZ2QFM8aEXorCTxUd47FQUDp9F1wHlf2KD-PEZlJdzlRy9Ulq9pxF1hJKElVAqJ6VoRAU&_nc_ohc=jtPvXBDOeaYQ7kNvwEbsCr7&_nc_gid=5Bdn9iclK5JnH2adbgg3sw&edm=ALGbJPMBAAAA&ccb=7-5&oh=00_AfNVRJ5_U4PgTu4eOZMPZ5TfdIW_VmgtNZkBghr3fNDyFw&oe=6858B786&_nc_sid=7d3ac5" alt="Main Image" />
       </section>
 
       <section id="diary" style="display:none;">
@@ -199,35 +203,11 @@
         <p>당신에게 전하고 싶은 메시지를 남겨보세요.</p>
       </section>
 
-      <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <button id="unmuteButton" onclick="unmuteVideo()">🎵 소리 켜기</button>
+      <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?autoplay=1&mute=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </main>
   </div>
 
   <script>
     function checkPassword() {
-      const pw = document.getElementById("password").value;
-      if (pw === "0304") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-        showSection('mainSection');
-      } else {
-        alert("비밀번호가 틀렸습니다.");
-      }
-    }
-
-    function showSection(id) {
-      const sections = ['mainSection', 'diary', 'photo', 'message', 'youtubeVideo'];
-      sections.forEach(sectionId => {
-        const el = document.getElementById(sectionId);
-        if (el) el.style.display = 'none';
-      });
-
-      if (id === 'youtubeVideo') {
-        document.getElementById('youtubeVideo').style.display = 'block';
-      } else {
-        document.getElementById(id).style.display = 'block';
-      }
-    }
-  </script>
-</body>
-</html>
+      const pw = document.getElementById("password
