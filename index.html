@@ -1,211 +1,215 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>LOVE0304</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LOVE0304</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
 
-  * {
-    box-sizing: border-box;
-  }
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    font-family: 'Nanum Myeongjo', serif;
-    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-    background-size: cover;
-    color: #f9e6e8;
-    position: relative;
-  }
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(30, 0, 20, 0.6);
-    z-index: -1;
-  }
-
-  header {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(255, 192, 203, 0.85);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    z-index: 1000;
-  }
-  nav {
-    display: flex;
-    gap: 2rem;
-    padding: 1rem 0;
-  }
-  nav a {
-    text-decoration: none;
-    color: #f9e6e8;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding-bottom: 0.2rem;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.3s;
-    cursor: pointer;
-  }
-  nav a:hover, nav a:focus {
-    border-bottom: 2px solid #ffc0cb;
-  }
-
-  main {
-    padding-top: 60px;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    min-height: 80vh;
-  }
-
-  section {
-    padding: 3rem 1rem;
-    border-bottom: 1px solid #ffc0cb;
-    min-height: 80vh;
-    background: rgba(50, 0, 30, 0.4);
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
-  }
-  section h2 {
-    color: #ffc0cb;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-shadow: 1px 1px 4px #330014;
-  }
-
-  #mainSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    text-align: center;
-    padding: 4rem 1rem;
-    min-height: 80vh;
-    background: rgba(70, 10, 40, 0.6);
-    border-radius: 10px;
-    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
-  }
-  #mainSection img {
-    max-width: 300px;
-    width: 300px;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.7);
-    display: block;
-    margin: 0 auto;
-  }
-  #mainSection .caption {
-    font-size: 1.8rem;      /* 글자 크기 키움 */
-    color: #ffc0cb;
-    margin-top: 20px;       /* 문구 위치를 이미지 밑에서 20px 아래로 내림 */
-    font-weight: 600;
-    font-family: 'Nanum Myeongjo', serif;
-  }
-  #mainSection p {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: #ffc0cb;
-    text-shadow: 1px 1px 5px #330014;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: rgba(30, 0, 20, 0.8);
-    color: #f9e6e8;
-  }
-  input {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ffc0cb;
-    border-radius: 5px;
-    width: 220px;
-    margin-bottom: 1rem;
-    background: transparent;
-    color: #f9e6e8;
-  }
-  button {
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #ffc0cb;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-weight: 600;
-    color: #8b0000;
-    transition: background-color 0.3s;
-  }
-  button:hover {
-    background-color: #ffb6c1;
-  }
-
-  #youtubeVideo {
-    width: 100%;
-    height: 80vh;
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
-    display: none;
-    margin-top: 20px;
-  }
-
-  #unmuteButton {
-    display: none;
-    margin: 1rem auto;
-    background-color: #fce4ec;
-    color: #880e4f;
-    font-size: 1.2rem;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-  }
-
-  #photoGallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  #photoGallery img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.5);
-  }
-
-  /* 모바일 대응 */
-  @media (max-width: 600px) {
-    main {
-      margin: 0 1rem 40px;
-      min-height: auto;
+    * {
+      box-sizing: border-box;
     }
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Nanum Myeongjo', serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #f9e6e8;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(30, 0, 20, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255, 192, 203, 0.85);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+    }
+    nav {
+      display: flex;
+      gap: 2rem;
+      padding: 1rem 0;
+    }
+    nav a {
+      text-decoration: none;
+      color: #f9e6e8;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+      cursor: pointer;
+    }
+    nav a:hover, nav a:focus {
+      border-bottom: 2px solid #ffc0cb;
+    }
+
+    main {
+      padding-top: 60px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      min-height: 80vh;
+    }
+
     section {
-      min-height: auto;
-      padding: 2rem 1rem;
+      padding: 3rem 1rem;
+      border-bottom: 1px solid #ffc0cb;
+      min-height: 80vh;
+      background: rgba(50, 0, 30, 0.4);
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.3);
+    }
+    section h2 {
+      color: #ffc0cb;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      text-shadow: 1px 1px 4px #330014;
+    }
+
+    #mainSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      text-align: center;
+      padding: 4rem 1rem;
+      min-height: 80vh;
+      background: rgba(70, 10, 40, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
+    }
+    #mainSection img {
+      max-width: 300px;
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(255, 182, 193, 0.7);
+      display: block;
+      margin: 0 auto;
+    }
+    #mainSection .caption {
+      font-size: 1.8rem;
+      color: #ffc0cb;
+      margin-top: 20px;
+      font-weight: 600;
     }
     #mainSection p {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #ffc0cb;
+      text-shadow: 1px 1px 5px #330014;
+      max-width: 600px;
+      margin: 0 auto;
     }
-  }
-</style>
+    #loveDays {
+      font-size: 1.5rem;
+      color: #ffb6c1;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: rgba(30, 0, 20, 0.8);
+      color: #f9e6e8;
+    }
+    input {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ffc0cb;
+      border-radius: 5px;
+      width: 220px;
+      margin-bottom: 1rem;
+      background: transparent;
+      color: #f9e6e8;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ffc0cb;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-weight: 600;
+      color: #8b0000;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #ffb6c1;
+    }
+
+    #youtubeVideo {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      display: none;
+      margin-top: 20px;
+    }
+
+    #unmuteButton {
+      display: none;
+      margin: 1rem auto;
+      background-color: #fce4ec;
+      color: #880e4f;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+
+    #photoGallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    #photoGallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      main {
+        margin: 0 1rem 40px;
+        min-height: auto;
+      }
+      section {
+        min-height: auto;
+        padding: 2rem 1rem;
+      }
+      #mainSection p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -228,81 +232,69 @@
   <main>
     <section id="mainSection">
       <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
+      <div id="loveDays"></div>
       <img src="Screenshot_20240801_221320_Gallery.jpg" alt="Main Image" />
       <div class="caption">@_lev_0&nbsp;&nbsp;❤️&nbsp;&nbsp;@b1n_2_</div>
     </section>
 
     <section id="diary" style="display:none;">
       <h2>Diary</h2>
-      <p>오늘의 기록을 여기에 적어보세요.</p>
+      <p>여기에 일기를 적어보세요.</p>
     </section>
 
     <section id="photo" style="display:none;">
       <h2>Photo</h2>
-      <div id="photoGallery"></div>
+      <div id="photoGallery">
+        <img src="IMG_20240801_221112_148.jpg" alt="Photo" />
+      </div>
     </section>
 
     <section id="message" style="display:none;">
       <h2>Message</h2>
-      <p>당신에게 전하고 싶은 메시지를 남겨보세요.</p>
+      <p>서로에게 전하고 싶은 말을 남겨보세요.</p>
     </section>
 
-    <button id="unmuteButton" onclick="unmuteVideo()">🎵 소리 켜기</button>
-    <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?enablejsapi=1&autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?autoplay=1&mute=1&loop=1&playlist=QKK_xchL8j8"></iframe>
+    <button id="unmuteButton" onclick="unmuteVideo()">🔈 사운드 켜기</button>
   </main>
 </div>
 
 <script>
-  const photoFiles = [
-    'IMG_20240801_221112_148.jpg',
-    // 필요하면 다른 사진 추가
-  ];
-
   function checkPassword() {
     const pw = document.getElementById("password").value;
     if (pw === "0304") {
       document.getElementById("login").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
       showSection('mainSection');
-
-      const video = document.getElementById('youtubeVideo');
-      video.style.display = 'block';
-
-      const unmuteBtn = document.getElementById('unmuteButton');
-      unmuteBtn.style.display = 'block';
+      document.getElementById("youtubeVideo").style.display = "block";
+      document.getElementById("unmuteButton").style.display = "block";
+      updateLoveDays();
     } else {
       alert("비밀번호가 틀렸습니다.");
     }
   }
 
-  function showSection(sectionId) {
-    const sections = ['mainSection', 'diary', 'photo', 'message'];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      el.style.display = (id === sectionId) ? 'block' : 'none';
-    });
+  function updateLoveDays() {
+    const startDate = new Date(2024, 2, 4);
+    const today = new Date();
+    const diffTime = today - startDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    document.getElementById("loveDays").textContent = `우리가 사랑한 지 ${diffDays}일`;
   }
 
   function unmuteVideo() {
-    const iframe = document.getElementById('youtubeVideo');
-    iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-    document.getElementById('unmuteButton').style.display = 'none';
+    const iframe = document.getElementById("youtubeVideo");
+    const src = iframe.src;
+    iframe.src = src.replace("mute=1", "mute=0");
   }
 
-  function loadPhotos() {
-    const gallery = document.getElementById('photoGallery');
-    photoFiles.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = filename;
-      img.alt = filename;
-      gallery.appendChild(img);
+  function showSection(id) {
+    const sections = document.querySelectorAll("main section");
+    sections.forEach(sec => {
+      sec.style.display = "none";
     });
+    document.getElementById(id).style.display = "block";
   }
-
-  // 페이지 로드 시 사진 미리 불러오기
-  window.onload = () => {
-    loadPhotos();
-  };
 </script>
 
 </body>
