@@ -170,6 +170,20 @@
     border: none;
   }
 
+  #photoGallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  #photoGallery img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.5);
+  }
+
   /* 모바일 대응 */
   @media (max-width: 600px) {
     main {
@@ -207,7 +221,7 @@
   <main>
     <section id="mainSection">
       <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
-      <img src="IMG_20240801_221112_148.jpg" alt="Main Image" />
+      <img src="Screenshot_20240801_221320_Gallery.jpg" alt="Main Image" />
     </section>
 
     <section id="diary" style="display:none;">
@@ -217,7 +231,7 @@
 
     <section id="photo" style="display:none;">
       <h2>Photo</h2>
-      <p>사진을 올리고 감상할 수 있는 공간입니다.</p>
+      <div id="photoGallery"></div>
     </section>
 
     <section id="message" style="display:none;">
@@ -231,6 +245,11 @@
 </div>
 
 <script>
+  const photoFiles = [
+    'IMG_20240801_221112_148.jpg',
+    // 여기에 다른 사진 파일명도 추가하세요 (깃허브 저장소에 업로드된 이름과 정확히 맞춰야 함)
+  ];
+
   function checkPassword() {
     const pw = document.getElementById("password").value;
     if (pw === "0304") {
@@ -253,11 +272,27 @@
   function showSection(sectionId) {
     const sections = ['mainSection', 'diary', 'photo', 'message'];
     sections.forEach(id => {
-      document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+      const el = document.getElementById(id);
+      if (id === sectionId) {
+        el.style.display = 'block';
+        if (id === 'photo') loadPhotos();
+      } else {
+        el.style.display = 'none';
+      }
     });
   }
 
-  // 유튜브 음소거 해제 함수
+  function loadPhotos() {
+    const gallery = document.getElementById('photoGallery');
+    gallery.innerHTML = '';
+    photoFiles.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = filename;  // 깃허브 루트에 이미지가 있을 경우
+      img.alt = 'Photo';
+      gallery.appendChild(img);
+    });
+  }
+
   function unmuteVideo() {
     const iframe = document.getElementById('youtubeVideo');
     iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
