@@ -97,14 +97,20 @@
     box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
   }
   #mainSection img {
-    max-width: 150px;
-    width: 150px;
-    height: 150px;
+    max-width: 300px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(255, 182, 193, 0.7);
     display: block;
     margin: 0 auto;
+  }
+  #mainSection div {
+    font-size: 1.5rem;
+    color: #ffc0cb;
+    margin-top: 10px;
+    font-weight: 600;
   }
   #mainSection p {
     font-size: 1.6rem;
@@ -222,6 +228,7 @@
     <section id="mainSection">
       <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
       <img src="Screenshot_20240801_221320_Gallery.jpg" alt="Main Image" />
+      <div>@_lev_0&nbsp;&nbsp;❤️&nbsp;&nbsp;@b1n_2_</div>
     </section>
 
     <section id="diary" style="display:none;">
@@ -247,7 +254,7 @@
 <script>
   const photoFiles = [
     'IMG_20240801_221112_148.jpg',
-    // 여기에 다른 사진 파일명도 추가하세요 (깃허브 저장소에 업로드된 이름과 정확히 맞춰야 함)
+    // 필요하면 다른 사진 추가
   ];
 
   function checkPassword() {
@@ -257,11 +264,9 @@
       document.getElementById("mainContent").style.display = "block";
       showSection('mainSection');
 
-      // 유튜브 영상 보이기
       const video = document.getElementById('youtubeVideo');
       video.style.display = 'block';
 
-      // 소리 켜기 버튼 보이기
       const unmuteBtn = document.getElementById('unmuteButton');
       unmuteBtn.style.display = 'block';
     } else {
@@ -273,12 +278,8 @@
     const sections = ['mainSection', 'diary', 'photo', 'message'];
     sections.forEach(id => {
       const el = document.getElementById(id);
-      if (id === sectionId) {
-        el.style.display = 'block';
-        if (id === 'photo') loadPhotos();
-      } else {
-        el.style.display = 'none';
-      }
+      el.style.display = (id === sectionId) ? 'block' : 'none';
+      if (id === 'photo' && id === sectionId) loadPhotos();
     });
   }
 
@@ -287,7 +288,7 @@
     gallery.innerHTML = '';
     photoFiles.forEach(filename => {
       const img = document.createElement('img');
-      img.src = filename;  // 깃허브 루트에 이미지가 있을 경우
+      img.src = filename;
       img.alt = 'Photo';
       gallery.appendChild(img);
     });
