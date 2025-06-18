@@ -20,7 +20,6 @@
       scroll-behavior: smooth;
       position: relative;
     }
-    /* 반투명 어두운 오버레이 */
     body::before {
       content: "";
       position: fixed;
@@ -53,6 +52,7 @@
       padding-bottom: 0.2rem;
       border-bottom: 2px solid transparent;
       transition: border-color 0.3s;
+      cursor: pointer;
     }
     nav a:hover, nav a:focus {
       border-bottom: 2px solid #ffc0cb;
@@ -66,6 +66,7 @@
       background: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      min-height: 80vh;
     }
 
     section {
@@ -85,7 +86,34 @@
       text-shadow: 1px 1px 4px #330014;
     }
 
-    /* 로그인 화면 */
+    #mainSection {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      text-align: center;
+      padding: 4rem 1rem;
+      min-height: 80vh;
+      background: rgba(70, 10, 40, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(255, 182, 193, 0.4);
+    }
+    #mainSection img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(255, 182, 193, 0.7);
+    }
+    #mainSection p {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #ffc0cb;
+      text-shadow: 1px 1px 5px #330014;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .container {
       height: 100vh;
       display: flex;
@@ -122,6 +150,15 @@
     button:hover {
       background-color: #ffb6c1;
     }
+
+    #youtubeVideo {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -134,27 +171,35 @@
   <div id="mainContent" style="display:none;">
     <header>
       <nav>
-        <a href="#diary">Diary</a>
-        <a href="#photo">Photo</a>
-        <a href="#message">Message</a>
+        <a href="#" onclick="showSection('mainSection')">Main</a>
+        <a href="#diary" onclick="showSection('diary')">Diary</a>
+        <a href="#photo" onclick="showSection('photo')">Photo</a>
+        <a href="#message" onclick="showSection('message')">Message</a>
       </nav>
     </header>
 
     <main>
-      <section id="diary">
+      <section id="mainSection">
+        <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80" alt="Romantic Image" />
+      </section>
+
+      <section id="diary" style="display:none;">
         <h2>Diary</h2>
         <p>오늘의 기록을 여기에 적어보세요.</p>
       </section>
 
-      <section id="photo">
+      <section id="photo" style="display:none;">
         <h2>Photo</h2>
         <p>사진을 올리고 감상할 수 있는 공간입니다.</p>
       </section>
 
-      <section id="message">
+      <section id="message" style="display:none;">
         <h2>Message</h2>
         <p>당신에게 전하고 싶은 메시지를 남겨보세요.</p>
       </section>
+
+      <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </main>
   </div>
 
@@ -164,9 +209,22 @@
       if (pw === "0304") {
         document.getElementById("login").style.display = "none";
         document.getElementById("mainContent").style.display = "block";
-        // 배경 변경하지 않고 이미지 유지
+        showSection('mainSection');
       } else {
         alert("비밀번호가 틀렸습니다.");
+      }
+    }
+
+    function showSection(id) {
+      ['mainSection', 'diary', 'photo', 'message', 'youtubeVideo'].forEach(sectionId => {
+        const el = document.getElementById(sectionId);
+        if (el) el.style.display = 'none';
+      });
+
+      if (id === 'youtubeVideo') {
+        document.getElementById('youtubeVideo').style.display = 'block';
+      } else {
+        document.getElementById(id).style.display = 'block';
       }
     }
   </script>
