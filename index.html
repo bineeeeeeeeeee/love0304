@@ -216,7 +216,8 @@
     }
 
     function showSection(id) {
-      ['mainSection', 'diary', 'photo', 'message', 'youtubeVideo'].forEach(sectionId => {
+      const sections = ['mainSection', 'diary', 'photo', 'message', 'youtubeVideo'];
+      sections.forEach(sectionId => {
         const el = document.getElementById(sectionId);
         if (el) el.style.display = 'none';
       });
