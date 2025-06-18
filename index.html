@@ -106,11 +106,12 @@
     display: block;
     margin: 0 auto;
   }
-  #mainSection div {
+  #mainSection .caption {
     font-size: 1.5rem;
     color: #ffc0cb;
     margin-top: 10px;
     font-weight: 600;
+    font-family: 'Nanum Myeongjo', serif;
   }
   #mainSection p {
     font-size: 1.6rem;
@@ -228,7 +229,7 @@
     <section id="mainSection">
       <p>바보와 뽑닥구리가 만들어가는 사랑 이야기</p>
       <img src="Screenshot_20240801_221320_Gallery.jpg" alt="Main Image" />
-      <div>@_lev_0&nbsp;&nbsp;❤️&nbsp;&nbsp;@b1n_2_</div>
+      <div class="caption">@_lev_0&nbsp;&nbsp;❤️&nbsp;&nbsp;@b1n_2_</div>
     </section>
 
     <section id="diary" style="display:none;">
@@ -279,18 +280,6 @@
     sections.forEach(id => {
       const el = document.getElementById(id);
       el.style.display = (id === sectionId) ? 'block' : 'none';
-      if (id === 'photo' && id === sectionId) loadPhotos();
-    });
-  }
-
-  function loadPhotos() {
-    const gallery = document.getElementById('photoGallery');
-    gallery.innerHTML = '';
-    photoFiles.forEach(filename => {
-      const img = document.createElement('img');
-      img.src = filename;
-      img.alt = 'Photo';
-      gallery.appendChild(img);
     });
   }
 
@@ -299,6 +288,21 @@
     iframe.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
     document.getElementById('unmuteButton').style.display = 'none';
   }
+
+  function loadPhotos() {
+    const gallery = document.getElementById('photoGallery');
+    photoFiles.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = filename;
+      img.alt = filename;
+      gallery.appendChild(img);
+    });
+  }
+
+  // 페이지 로드 시 사진 미리 불러오기
+  window.onload = () => {
+    loadPhotos();
+  };
 </script>
 
 </body>
