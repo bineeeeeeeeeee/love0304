@@ -16,7 +16,6 @@
     background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
     background-size: cover;
     color: #f9e6e8;
-    scroll-behavior: smooth;
     position: relative;
   }
   body::before {
@@ -160,6 +159,10 @@
     margin: 1rem auto;
     background-color: #fce4ec;
     color: #880e4f;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
   }
 
   /* 모바일 대응 */
@@ -218,7 +221,7 @@
     </section>
 
     <button id="unmuteButton" onclick="unmuteVideo()">🎵 소리 켜기</button>
-    <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?autoplay=1&mute=1&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe id="youtubeVideo" src="https://www.youtube.com/embed/QKK_xchL8j8?enablejsapi=1&autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </main>
 </div>
 
@@ -230,9 +233,11 @@
       document.getElementById("mainContent").style.display = "block";
       showSection('mainSection');
 
+      // 유튜브 영상 보이기
       const video = document.getElementById('youtubeVideo');
       video.style.display = 'block';
 
+      // 소리 켜기 버튼 보이기
       const unmuteBtn = document.getElementById('unmuteButton');
       unmuteBtn.style.display = 'block';
     } else {
