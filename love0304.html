@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>LOVE0304</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Serif KR', serif;
+      background: #fff0f5;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background 1s;
+    }
+    .container, .content {
+      text-align: center;
+    }
+    .hidden { display: none; }
+    input {
+      padding: 10px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #ffc0cb;
+      border: none;
+      cursor: pointer;
+    }
+    .content h1 {
+      font-size: 2.5em;
+      color: #8b0000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="login">
+    <h2>비밀번호를 입력하세요</h2>
+    <input type="password" id="password" placeholder="비밀번호">
+    <button onclick="checkPassword()">입장</button>
+  </div>
+
+  <div class="content hidden" id="mainContent">
+    <h1>LOVE0304에 오신 걸 환영합니다</h1>
+    <p>이곳은 우리만의 비밀 공간입니다 💖</p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const pw = document.getElementById("password").value;
+      if (pw === "0304") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("mainContent").classList.remove("hidden");
+        document.body.style.background = "#ffe4e1";
+      } else {
+        alert("비밀번호가 틀렸습니다.");
+      }
+    }
+  </script>
+</body>
+</html>
